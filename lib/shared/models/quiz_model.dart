@@ -9,16 +9,16 @@ enum Level {
 
 class QuizModel {
   final String title;
-  final List<QuestionModel> question;
+  final List<QuestionModel> questions;
   final int questionAwnsered;
   final String imagem;
   final Level level;
 
   QuizModel({
     required this.title,
-    required this.question,
-    this.questionAwnsered = 0,
+    required this.questions,
     required this.imagem,
     required this.level,
+    this.questionAwnsered = 0,
   });
 }
