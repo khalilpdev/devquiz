@@ -19,8 +19,7 @@ class HomeController {
     await Future.delayed(Duration(seconds: 2));
     user = UserModel(
       name: "Leandro Khalil",
-      photoUrl:
-          "https://avatars.githubusercontent.com/u/82157454?s=400&u=36b9ad6e8fcbda0cfb89e512149529b01acef63e&v=4",
+      photoUrl: "",
     );
     state = HomeState.sucess;
   }
