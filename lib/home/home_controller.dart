@@ -4,22 +4,30 @@ import 'package:devquiz/shared/models/awnser_model.dart';
 import 'package:devquiz/shared/models/question_model.dart';
 import 'package:devquiz/shared/models/quiz_model.dart';
 import 'package:devquiz/shared/models/user_model.dart';
+import 'package:flutter/foundation.dart';
 
 class HomeController {
-  HomeState state = HomeState.empty;
+  final stateNotifier = ValueNotifier<HomeState>(HomeState.empty);
+  set state(HomeState state) => stateNotifier.value = state;
+  HomeState get state => stateNotifier.value;
 
   UserModel? user;
   List<QuizModel>? quizzes;
 
-  void getUser() {
+  void getUser() async {
+    state = HomeState.loading;
+    await Future.delayed(Duration(seconds: 2));
     user = UserModel(
       name: "Leandro Khalil",
       photoUrl:
           "https://avatars.githubusercontent.com/u/82157454?s=400&u=36b9ad6e8fcbda0cfb89e512149529b01acef63e&v=4",
     );
+    state = HomeState.sucess;
   }
 
-  void getQuizzes() {
+  void getQuizzes() async {
+    state = HomeState.loading;
+    await Future.delayed(Duration(seconds: 2));
     quizzes = [
       QuizModel(
         title: "NLW 5 Flutter",
@@ -48,5 +56,6 @@ class HomeController {
         ],
       ),
     ];
+    state = HomeState.sucess;
   }
 }
