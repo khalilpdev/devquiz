@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 class AwnserWidget extends StatelessWidget {
   final AwnserModel anwser;
   final bool isSelected;
+  final bool disabled;
   final VoidCallback onTap;
 
   const AwnserWidget({
@@ -13,6 +14,7 @@ class AwnserWidget extends StatelessWidget {
     required this.anwser,
     this.isSelected = false,
     required this.onTap,
+    this.disabled = false,
   }) : super(key: key);
 
   Color get _selectedColorRight =>
@@ -36,48 +38,53 @@ class AwnserWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-      child: GestureDetector(
-        onTap: onTap,
-        child: Container(
-          padding: EdgeInsets.all(16),
-          decoration: BoxDecoration(
-              color: isSelected ? _selectedColorCardRight : AppColors.white,
-              borderRadius: BorderRadius.circular(10),
-              border: Border.fromBorderSide(BorderSide(
-                color: isSelected ? _selectedBorderCardRight : AppColors.border,
-              ))),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Text(
-                  anwser.title,
-                  style:
-                      isSelected ? _selectedTextStyleRight : AppTextStyles.body,
+      child: IgnorePointer(
+        ignoring: disabled,
+        child: GestureDetector(
+          onTap: onTap,
+          child: Container(
+            padding: EdgeInsets.all(16),
+            decoration: BoxDecoration(
+                color: isSelected ? _selectedColorCardRight : AppColors.white,
+                borderRadius: BorderRadius.circular(10),
+                border: Border.fromBorderSide(BorderSide(
+                  color:
+                      isSelected ? _selectedBorderCardRight : AppColors.border,
+                ))),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Text(
+                    anwser.title,
+                    style: isSelected
+                        ? _selectedTextStyleRight
+                        : AppTextStyles.body,
+                  ),
                 ),
-              ),
-              Container(
-                width: 24,
-                height: 24,
-                decoration: BoxDecoration(
-                    color: isSelected ? _selectedColorRight : AppColors.white,
-                    borderRadius: BorderRadius.circular(500),
-                    border: Border.fromBorderSide(
-                      BorderSide(
-                        color: isSelected
-                            ? _selectedBorderRight
-                            : AppColors.border,
-                      ),
-                    )),
-                child: isSelected
-                    ? Icon(
-                        _selectedIconRight,
-                        color: AppColors.white,
-                        size: 16,
-                      )
-                    : null,
-              )
-            ],
+                Container(
+                  width: 24,
+                  height: 24,
+                  decoration: BoxDecoration(
+                      color: isSelected ? _selectedColorRight : AppColors.white,
+                      borderRadius: BorderRadius.circular(500),
+                      border: Border.fromBorderSide(
+                        BorderSide(
+                          color: isSelected
+                              ? _selectedBorderRight
+                              : AppColors.border,
+                        ),
+                      )),
+                  child: isSelected
+                      ? Icon(
+                          _selectedIconRight,
+                          color: AppColors.white,
+                          size: 16,
+                        )
+                      : null,
+                )
+              ],
+            ),
           ),
         ),
       ),
